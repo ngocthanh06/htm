@@ -1,0 +1,29 @@
+.message {
+    display: flex;
+    align-items: flex-start; /* Căn chỉnh avatar và nội dung tin nhắn */
+    margin-bottom: 15px;
+}
+
+.message.reply {
+    flex-direction: row-reverse; /* Điều chỉnh chiều để hiển thị bên phải */
+}
+
+.avatar {
+    width: 40px; /* Kích thước avatar */
+    height: 40px; /* Kích thước avatar */
+    border-radius: 50%; /* Bo tròn avatar */
+    margin: 0 10px; /* Khoảng cách giữa avatar và tin nhắn */
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column; /* Sắp xếp nội dung theo cột */
+}
+
+.message-text {
+    background-color: #e4f0ff; /* Màu nền cho tin nhắn */
+    padding: 10px;
+    border-radius: 5px;
+    /* max-width: 70%;  */
+    word-break: break-word; /* Ngăn ngừa từ dài làm tràn */
+}
