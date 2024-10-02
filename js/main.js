@@ -1,8 +1,8 @@
 const eventDate = new Date('2024-10-20T00:00:00');
+const now = new Date();
 
 // Cập nhật countdown mỗi giây
 const countdownInterval = setInterval(() => {
-    const now = new Date();
     const timeLeft = eventDate - now;
 
     // Tính toán các thông số
@@ -30,11 +30,8 @@ const anniversaryDate = new Date('2023-06-22T00:00:00');
 
 // Hàm cập nhật kết quả
 const updateTime = setInterval(() => {
-    // Ngày hiện tại
-    const currentDate = new Date();
-
     // Tính toán độ chênh lệch thời gian
-    const timeDiffInMillis = currentDate - anniversaryDate;
+    const timeDiffInMillis = now - anniversaryDate;
 
     // Chuyển đổi mili giây thành từng đơn vị thời gian
     const seconds = Math.floor(timeDiffInMillis / 1000);
@@ -49,9 +46,9 @@ const updateTime = setInterval(() => {
     const remainingDays = Math.floor(days % 365 % 30 % 7);
 
     // Tính giờ, phút, giây còn lại
-    const remainingHours = currentDate.getHours();
-    const remainingMinutes = currentDate.getMinutes();
-    const remainingSeconds = currentDate.getSeconds();
+    const remainingHours = now.getHours();
+    const remainingMinutes = now.getMinutes();
+    const remainingSeconds = now.getSeconds();
 
     // Hiển thị kết quả
     const resultElement = document.getElementById('result');
