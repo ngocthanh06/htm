@@ -27,3 +27,17 @@
     /* max-width: 70%;  */
     word-break: break-word; /* Ngăn ngừa từ dài làm tràn */
 }
+
+@media (max-width: 768px) {
+    .order-lg-first .position-relative .anim-zoom {
+        object-fit: cover; 
+        width: 100%
+    }
+}
+
+@media (min-width: 769px) {
+    .order-lg-first .position-relative .anim-zoom {
+        object-fit: cover; 
+        width: 100%
+    }
+}
