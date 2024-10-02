@@ -1,8 +1,8 @@
 const eventDate = new Date('2024-10-20T00:00:00');
-const now = new Date();
 
 // Cập nhật countdown mỗi giây
 const countdownInterval = setInterval(() => {
+    const now = new Date();
     const timeLeft = eventDate - now;
 
     // Tính toán các thông số
@@ -30,6 +30,7 @@ const anniversaryDate = new Date('2023-06-22T00:00:00');
 
 // Hàm cập nhật kết quả
 const updateTime = setInterval(() => {
+    const now = new Date();
     // Tính toán độ chênh lệch thời gian
     const timeDiffInMillis = now - anniversaryDate;
 
@@ -56,4 +57,4 @@ const updateTime = setInterval(() => {
         ${years} năm, ${months} tháng, ${weeks} tuần, ${remainingDays} ngày, 
         ${remainingHours} giờ, ${remainingMinutes} phút, ${remainingSeconds} giây
     `;
-})
+}, 1000)
