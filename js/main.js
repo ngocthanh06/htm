@@ -1,4 +1,4 @@
-const eventDate = new Date('2024-10-20T00:00:00');
+const eventDate = new Date('2024-10-20T19:00:00');
 
 // Cập nhật countdown mỗi giây
 const countdownInterval = setInterval(() => {
@@ -58,3 +58,4 @@ const updateTime = setInterval(() => {
         ${remainingHours} giờ, ${remainingMinutes} phút, ${remainingSeconds} giây
     `;
 }, 1000)
+

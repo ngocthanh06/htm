@@ -12,6 +12,7 @@
 
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
     <!-- Required CSS files -->
     <link href="css/style.min.css" rel="stylesheet">
@@ -25,10 +26,28 @@
 </head>
 
 <body id="page-top" class="h-100 overflow-x-hidden w-100">
+    <div id="preloader">
+        <audio id="background-music" src="./media/Piano.mp3" autoplay loop></audio>
+        <button id="enable-sound-button" style="color: #9b1010;"><b>Bấm vào đây để bật nhạc</b></button>
+    <script>
+    
+    document.getElementById('enable-sound-button').addEventListener('click', function() {
+        const music = document.getElementById('background-music');
+        music.play();  // Phát nhạc sau khi người dùng nhấn nút
+        this.style.display = 'none';  // Ẩn nút sau khi nhạc phát
+    });
+    </script>
+        <div class="loading-text">
+            <span id="message"></span><span class="cursor">|</span>
+        </div>
+        <div class="heart-container"></div>
+        <button id="skip-preload" style="position: absolute; top: 20px; right: 20px; color:#9b1010">Bỏ qua</button>
+
+    </div>
 
     <!-- Preloader Start -->
     <div class="preloader bg-light h-100 position-fixed w-100 d-flex justify-content-center align-items-center">
-        <svg width="150px" height="150px" viewBox="0 0 100 100" y="0px" x="0px" class="position-absolute start-50 top-50 translate-middle heart-animation">
+        <!-- <svg width="150px" height="150px" viewBox="0 0 100 100" y="0px" x="0px" class="position-absolute start-50 top-50 translate-middle heart-animation">
             <g>
                 <path class="anim-heart"
                     d="M89.49,37.8c0,25.54-39.59,46.24-39.59,46.24S10.31,63.34,10.31,37.8c0-29.59,39.59-28.67,39.59,0C49.9,10.06,89.49,8.21,89.49,37.8 z"
@@ -39,7 +58,7 @@
                     stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.5"
                     stroke="#000000" fill="#DDB796"></path>
             </g>
-        </svg>
+        </svg> -->
     </div>
     <!-- Preloader End -->
 
@@ -596,7 +615,8 @@
 
                             <div class="mb-2 text-body-secondary">
                                 <p>Điều cảm động nhất không phải là em nói thương anh,</p>
-                                <p>mà em nói với người khác rằng <span style="color:#b46a49; font-family: 'Kaushan Script';">"Em chỉ thương anh"</span>.</p>
+                                <p>mà em nói với người khác rằng </p>
+                                <span style="color:#b46a49; font-family: 'Kaushan Script';">"Em chỉ thương anh"</span>.
                             </div>
                             <!-- //.mb-2 -->
 
@@ -648,11 +668,88 @@
             class="shape-wave bottom-0 d-none d-lg-block end-0 position-absolute z-3">
     </footer>
     <!-- Footer End -->
-
-
+     
     <!-- Required JS files -->
     <script src="./js/script.min.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+        
+    // Nút tắt preload
+    document.getElementById('skip-preload').addEventListener('click', function() {
+        document.getElementById('preloader').style.display = 'none'; // Ẩn preload
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+    // Thông điệp lãng mạn cho ngày 20-10, chia theo từng câu
+    const message = "Tự nhìn lên trời cao, tận hưởng bầu trời sao của riêng mình. Mỗi cô gái đều là một nàng công chúa, dù trong một căn gác tồi tàn hay một lâu đài tráng lệ. Chỉ cần yêu bản thân, những điều tốt đẹp sẽ đến. Vào ngày đặc biệt này, mong em nở rộ như một bông hoa, rực rỡ và xinh đẹp. Mong nụ cười của em rạng rỡ như mặt trời, cuộc sống của em tốt đẹp như mong đợi!";
+    const sentences = message.split(". ");  // Chia thông điệp thành mảng các câu
+    const messageElement = document.getElementById("message");
+    let sentenceIndex = 0;
+
+    // Hiển thị câu tiếp theo
+    function getNextSentence() {
+        if (sentenceIndex < sentences.length) {
+            let sentence = sentences[sentenceIndex];
+            sentenceIndex++;
+            return sentence.trim() + ".";  // Trả về câu và thêm dấu chấm vào cuối nếu cần
+        } else {
+            return null;  // Hết câu
+        }
+    }
+
+    // Tạo hiệu ứng gõ chữ và tự động chuyển sang câu mới
+    function typeMessage() {
+        let sentence = getNextSentence();  // Lấy câu tiếp theo
+
+        if (sentence === null) {
+            // Khi hết câu, ẩn preloader và hiển thị nội dung trang
+            document.getElementById("preloader").style.display = "none";
+            music.play()
+            return;
+        }
+
+        messageElement.textContent = "";  // Xóa nội dung trước đó
+
+        let charIndex = 0;
+
+        function typeChar() {
+            if (charIndex < sentence.length) {
+                messageElement.textContent += sentence.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 100);  // Tốc độ gõ chữ (100ms mỗi ký tự)
+            } else {
+                // Sau khi gõ xong câu, đợi 2 giây rồi chuyển sang câu tiếp theo
+                setTimeout(function () {
+                    typeMessage();  // Gọi lại để chuyển sang câu mới
+                }, 1000);  // Thời gian chờ sau khi gõ xong (2000ms = 2 giây)
+            }
+        }
+
+        typeChar();  // Bắt đầu gõ ký tự đầu tiên
+    }
+
+    // Hiệu ứng trái tim nổi lên trong preloader
+    function createHearts() {
+        const heartContainer = document.querySelector('.heart-container');
+        setInterval(function () {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);  // Thời gian sống của trái tim là 5 giây
+        }, 300);  // Mỗi 300ms sẽ có một trái tim xuất hiện
+    }
+
+    // Bắt đầu hiệu ứng khi trang tải xong
+    typeMessage();
+    createHearts();
+})
+    </script>
 </body>
 
 </html>

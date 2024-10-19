@@ -85,3 +85,78 @@
 	height: 100%;
 	z-index: 0;
 }
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff3cd; /* Màu xanh đậm */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-text {
+    font-size: 24px;
+    color: #100d0b; /* Màu cam nhạt */
+    font-family: 'Courier New', Courier, monospace;
+    padding: 15px;
+    text-align: center;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #E76F51; /* Màu cam đậm */
+    animation: blink 0.7s steps(2) infinite;
+}
+
+/* Animation for blinking cursor */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Hearts style */
+.heart-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #E76F51; /* Màu cam đậm */
+    transform: rotate(45deg);
+    animation: floatUp 5s ease-in infinite;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(45deg);
+        bottom: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.5) rotate(45deg);
+        bottom: 100%;
+    }
+}
+
